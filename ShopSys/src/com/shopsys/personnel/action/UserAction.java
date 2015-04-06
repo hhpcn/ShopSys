@@ -1,5 +1,6 @@
 package com.shopsys.personnel.action;
 
+import java.util.List;
 import java.util.Map;
 
 import com.shopsys.personnel.model.User;
@@ -43,8 +44,10 @@ public class UserAction extends BaseAction {
 	
 	
 	public String listUsers() {
-		System.out.println(page);
-		System.out.println(rows);
+		int currentPage=Integer.parseInt(page);
+		int pageSize=Integer.parseInt(rows);
+		List<User> users=userService.listPageRowsByClass(User.class, currentPage, pageSize);
+		dataMap.put("rows", users);
 		
 		return "list";
 	}

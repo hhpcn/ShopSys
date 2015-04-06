@@ -32,6 +32,9 @@
 		
 		<!-- 全局results -->
 		<global-results>
+			<result name="list" type="json">
+				dataMap
+			</result>
 			<result name="error" type="redirect">
 				/error.jsp
 			</result>

@@ -7,7 +7,7 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
 public class BaseAction extends ActionSupport{
 	private static final long serialVersionUID = 2817071984746760965L;
-	private Map<String, Object> dataMap;
+	protected Map<String, Object> dataMap;
 	protected BaseService baseService;
 	protected JsonResult json=new JsonResult();
 	public JsonResult getJson() {
