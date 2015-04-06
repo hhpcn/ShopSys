@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<title>Blank Page - Ace Admin</title>
+<title>Blank Page - Ace Admin1111111111</title>
 
 <!-- ajax layout which only needs content area -->
 <div class="row">
