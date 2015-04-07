@@ -1,5 +1,6 @@
 package com.shopsys.personnel.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,10 @@ public class UserAction extends BaseAction {
 	
 	private String page;
 	private String rows;
+	private Boolean _search;
+	private String nd;
+	private String sidx;
+	private String sord;
 
 	
 	
@@ -44,6 +49,7 @@ public class UserAction extends BaseAction {
 	
 	
 	public String listUsers() {
+		dataMap=new HashMap<String, Object>();
 		int currentPage=Integer.parseInt(page);
 		int pageSize=Integer.parseInt(rows);
 		List<User> users=userService.listPageRowsByClass(User.class, currentPage, pageSize);
@@ -89,6 +95,46 @@ public class UserAction extends BaseAction {
 
 	public void setRows(String rows) {
 		this.rows = rows;
+	}
+
+
+	public Boolean get_search() {
+		return _search;
+	}
+
+
+	public void set_search(Boolean _search) {
+		this._search = _search;
+	}
+
+
+	public String getNd() {
+		return nd;
+	}
+
+
+	public void setNd(String nd) {
+		this.nd = nd;
+	}
+
+
+	public String getSidx() {
+		return sidx;
+	}
+
+
+	public void setSidx(String sidx) {
+		this.sidx = sidx;
+	}
+
+
+	public String getSord() {
+		return sord;
+	}
+
+
+	public void setSord(String sord) {
+		this.sord = sord;
 	}
 
 

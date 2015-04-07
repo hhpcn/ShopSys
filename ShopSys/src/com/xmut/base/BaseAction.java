@@ -1,13 +1,16 @@
 package com.xmut.base;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cn.xmut.test.model.News;
 
 import com.opensymphony.xwork2.ActionSupport;
 public class BaseAction extends ActionSupport{
 	private static final long serialVersionUID = 2817071984746760965L;
-	protected Map<String, Object> dataMap;
+	public Map<String, Object> dataMap;
 	protected BaseService baseService;
 	protected JsonResult json=new JsonResult();
 	public JsonResult getJson() {

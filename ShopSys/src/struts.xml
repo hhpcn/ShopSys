@@ -33,7 +33,7 @@
 		<!-- 全局results -->
 		<global-results>
 			<result name="list" type="json">
-				dataMap
+				<param name="root">dataMap</param>
 			</result>
 			<result name="error" type="redirect">
 				/error.jsp
