@@ -12,6 +12,7 @@
   <property  name="roleName" type="java.lang.String">
    		<column length="45" name="roleName" not-null="true"/>
   </property>
+  
   <property name="userName" type="java.lang.String">
    		<column length="45" name="userName" not-null="true"/>
   </property>

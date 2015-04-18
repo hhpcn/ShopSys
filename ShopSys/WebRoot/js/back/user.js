@@ -54,14 +54,14 @@
 					formatoptions:{ 
 						keys:true,
 						//delbutton: false,//disable delete button
-						
 						delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
-						//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+						//editformbutton:true,
+						//editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
 					}
 				},
-				{name:'id',index:'id', width:60, sorttype:"int", editable: true},
+				{name:'id',index:'id', width:60, sorttype:"int"},
 				{name:'userName',index:'userName', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
-				{name:'roleName',index:'roleName', width:60, editable: true},
+				{name:'roleName',index:'roleName', width:60, editable: true,edittype:"select",editoptions:{value:"管理员:管理员;普通用户:普通用户"}},
 				{name:'status',index:'status', width:70, editable: true,edittype:"checkbox",editoptions: {value:"Yes:No"},unformat: aceSwitch}
 			], 
 	
@@ -87,7 +87,7 @@
 				}, 0);
 			},
 	
-			editurl: "/dummy.html",//nothing is saved
+			editurl: "/ShopSys/personnel/userAction_edit.action",//nothing is saved
 			caption: "管理员用户表格"
 	
 	
@@ -202,7 +202,8 @@
 					form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 				}
 			}
-		)
+		);
+	
 	
 	
 		
@@ -330,5 +331,8 @@
 			$(grid_selector).jqGrid('GridUnload');
 			$('.ui-jqdialog').remove();
 		});
+		
+		
+		
 	});
 	});

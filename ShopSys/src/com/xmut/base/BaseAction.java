@@ -1,24 +1,22 @@
 package com.xmut.base;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import cn.xmut.test.model.News;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 public class BaseAction extends ActionSupport{
 	private static final long serialVersionUID = 2817071984746760965L;
 	public Map<String, Object> dataMap;
+	public Boolean flag=false;
 	protected BaseService baseService;
-	protected JsonResult json=new JsonResult();
-	public JsonResult getJson() {
-		return json;
+	
+	
+	
+	public BaseService getBaseService() {
+		return baseService;
 	}
-	public void setJson(JsonResult json) {
-		this.json = json;
-	}
+
 	public void setBaseService(BaseService baseService) {
 		this.baseService = baseService;
 	}
@@ -30,24 +28,14 @@ public class BaseAction extends ActionSupport{
 	public void setDataMap(Map<String, Object> dataMap) {
 		this.dataMap = dataMap;
 	}
-	
-	
-	
-	protected class JsonResult implements Serializable{
-		private static final long serialVersionUID = -8483874375183014284L;
-		private Object msg;
-		private boolean isSuccess=false;
-		public Object getMsg() {
-			return msg;
-		}
-		public void setMsg(Object msg) {
-			this.msg = msg;
-		}
-		public boolean isSuccess() {
-			return isSuccess;
-		}
-		public void setSuccess(boolean isSuccess) {
-			this.isSuccess = isSuccess;
-		}
+
+	public Boolean getFlag() {
+		return flag;
 	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
+	
+	
 }

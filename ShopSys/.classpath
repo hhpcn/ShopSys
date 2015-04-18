@@ -55,6 +55,9 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strust2/tiles-core-2.0.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strust2/tiles-jsp-2.0.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strust2/xwork-core-2.3.20.jar" sourcepath="G:/web/包/struts-2.3.20-all/struts-2.3.20/src/xwork-core/src/main/java"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strust2/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strust2/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strust2/commons-lang-2.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

@@ -35,6 +35,9 @@
 			<result name="list" type="json">
 				<param name="root">dataMap</param>
 			</result>
+			<result name="operation" type="json">
+				<param name="root">flag</param>
+			</result>
 			<result name="error" type="redirect">
 				/error.jsp
 			</result>

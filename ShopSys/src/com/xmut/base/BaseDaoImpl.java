@@ -84,6 +84,7 @@ public class BaseDaoImpl implements BaseDao {
 	public <T> List<T> listPageRowsByClassAndParams(Class<?> entityClass,int currentPage,
 			int pageSize,String whereParams) {
 		Query query=this.getSession().createQuery("from "+entityClass.getSimpleName()+" "+whereParams);
+		System.out.println("from "+entityClass.getSimpleName()+" "+whereParams);
 		query.setFirstResult((currentPage-1)*pageSize);
 		query.setMaxResults(pageSize);
 		return query.list();
@@ -120,13 +121,13 @@ public class BaseDaoImpl implements BaseDao {
 
 	@Override
 	public void update(Object entity) {
-		this.getSession().save(entity);
+		this.getSession().update(entity);
 		
 	}
 
 	@Override
 	public void update(Class<?> entityClass, Object entity) {
-		this.getSession().save(entityClass.getSimpleName(), entity);
+		this.getSession().update(entityClass.getSimpleName(), entity);
 		
 	}
 

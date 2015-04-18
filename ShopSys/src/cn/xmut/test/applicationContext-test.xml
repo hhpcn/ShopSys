@@ -13,6 +13,7 @@
            http://www.springframework.org/schema/aop 
            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
+
 	<!--测试 -->
     <bean id="newsService" class="cn.xmut.test.serviceimpl.NewsServiceImpl" parent="baseService"></bean>
     <bean id="newsAction" class="cn.xmut.test.action.NewsAction" parent="baseAction">

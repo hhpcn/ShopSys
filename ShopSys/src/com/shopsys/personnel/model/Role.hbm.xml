@@ -16,4 +16,5 @@
             <column name="code"  length="45" not-null="true"/>
         </property>
     </class>
+    
 </hibernate-mapping>

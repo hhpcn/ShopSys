@@ -7,4 +7,5 @@
 			<result name="loginsuccess" type="redirect">/back/index.jsp</result>
 		</action>
 	</package>
-</struts>  
+</struts> 
+ 

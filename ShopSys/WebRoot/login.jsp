@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input name="username" type="text" class="form-control" placeholder="Username" id="Username" />
+															<input name="userName" type="text" class="form-control" placeholder="Username" id="Username" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
