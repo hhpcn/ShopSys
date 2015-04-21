@@ -159,6 +159,7 @@
 					.wrapInner('<div class="widget-header" />')
 					style_edit_form(form);
 				}
+			
 			},
 			{
 				//delete record form
@@ -173,7 +174,7 @@
 					form.data('styled', true);
 				},
 				onClick : function(e) {
-					//alert(1);
+					alert(1);
 				}
 			},
 			{
