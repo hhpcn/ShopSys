@@ -45,23 +45,6 @@ public class UserAction extends BaseAction {
 	private User user;
 	
 	
-	
-	private String page;//当前页
-	private String rows;
-	private Boolean _search;//是否条件搜索
-	private String nd;
-	private String sidx;
-	private String sord;
-	private String filters;//条件搜索
-	private String searchField;		//单字段查询的时候，查询字段名称
-	private String searchString;	//单字段查询的时候，查询字段的值
-	private String searchOper;		//单字段查询的时候，查询的操作
-	private String oper;//编辑表格行时，传过来的操作类型。
-	
-	
-
-	
-	
 	public String login() {
 		
 	System.out.println("login");
@@ -134,7 +117,7 @@ public class UserAction extends BaseAction {
 			userService.deleteByClassAndIds(User.class, intIds);
 			flag=true;
 		}
-		return "operation";
+		return "flag";
 	}
 	
 	public UserService getUserService() {
@@ -149,94 +132,6 @@ public class UserAction extends BaseAction {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPage() {
-		return page;
-	}
-
-	public void setPage(String page) {
-		this.page = page;
-	}
-
-	public String getRows() {
-		return rows;
-	}
-
-	public void setRows(String rows) {
-		this.rows = rows;
-	}
-
-	public Boolean get_search() {
-		return _search;
-	}
-
-	public void set_search(Boolean _search) {
-		this._search = _search;
-	}
-
-	public String getNd() {
-		return nd;
-	}
-
-	public void setNd(String nd) {
-		this.nd = nd;
-	}
-
-	public String getSidx() {
-		return sidx;
-	}
-
-	public void setSidx(String sidx) {
-		this.sidx = sidx;
-	}
-
-	public String getSord() {
-		return sord;
-	}
-
-	public void setSord(String sord) {
-		this.sord = sord;
-	}
-
-	public String getFilters() {
-		return filters;
-	}
-
-	public void setFilters(String filters) {
-		this.filters = filters;
-	}
-
-	public String getSearchField() {
-		return searchField;
-	}
-
-	public void setSearchField(String searchField) {
-		this.searchField = searchField;
-	}
-
-	public String getSearchString() {
-		return searchString;
-	}
-
-	public void setSearchString(String searchString) {
-		this.searchString = searchString;
-	}
-
-	public String getSearchOper() {
-		return searchOper;
-	}
-
-	public void setSearchOper(String searchOper) {
-		this.searchOper = searchOper;
-	}
-
-	public String getOper() {
-		return oper;
-	}
-
-	public void setOper(String oper) {
-		this.oper = oper;
 	}
 
 	public User getUser() {

@@ -16,6 +16,7 @@
 		classpath:applicationContext.xml,
 		classpath:cn/xmut/test/applicationContext-test.xml
 		classpath:com/shopsys/personnel/applicationContext-personnel.xml
+		classpath:com/shopsys/productmanage/applicationContext-productmanage.xml
 	</param-value>
   </context-param>
   <listener>

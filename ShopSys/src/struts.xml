@@ -13,6 +13,8 @@
 	<constant name="struts.devMode" value="true"/>
 	<!-- 常量，表明交由spring管理 -->
 	<constant name="struts.objectFactory" value="spring" /> 
+	<!-- 设置上传文件的大小 -->
+	<constant name="struts.multipart.maxSize" value="10701096"></constant>
 	
 <package name="struts-base"  extends="json-default">
 		<!-- 权限验证 -->
@@ -35,7 +37,10 @@
 			<result name="list" type="json">
 				<param name="root">dataMap</param>
 			</result>
-			<result name="operation" type="json">
+			<result name="dataMap" type="json">
+				<param name="root">dataMap</param>
+			</result>
+			<result name="flag" type="json">
 				<param name="root">flag</param>
 			</result>
 			<result name="error" type="redirect">
@@ -51,9 +56,23 @@
 		<action name="manageAction_*" class="manageAction">
 		    <result name="SUCCESS">/WEB-INF/ajax/content/{1}.html</result>
 		</action>
+		
+		<action name="ckeditorUploadAction_*" class="ckeditorUploadAction"  method="{1}">
+			<result type="json" name="guideimgsuccess">
+                <param name="contentType">
+                    text/html
+                </param>
+            </result>
+            <result type="json" name="guideimgerror">
+                <param name="contentType">
+                    text/html
+                </param>
+            </result>
+		</action>
+		
 </package>
 
 	<include file="cn/xmut/test/struts-test.xml"></include>
 	<include file="com/shopsys/personnel/struts-personnel.xml"></include>
- 
+ 	<include file="com/shopsys/productmanage/struts-productmanage.xml"></include>
  </struts>  
