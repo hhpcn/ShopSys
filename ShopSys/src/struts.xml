@@ -58,7 +58,7 @@
 		</action>
 		
 		<action name="ckeditorUploadAction_*" class="ckeditorUploadAction"  method="{1}">
-			<result type="json" name="guideimgsuccess">
+			<!-- <result type="json" name="guideimgsuccess">
                 <param name="contentType">
                     text/html
                 </param>
@@ -67,7 +67,7 @@
                 <param name="contentType">
                     text/html
                 </param>
-            </result>
+            </result> -->
 		</action>
 		
 </package>
