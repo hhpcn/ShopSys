@@ -76,7 +76,6 @@ public class TestBaseServiceImpl {
     public void testListByHQL(){
     	List<News> news=baseService.listByHQL("from News");
     	System.out.println(news.get(0).getTitle());
-    	
     }
     
     @Test
