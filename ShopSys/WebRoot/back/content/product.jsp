@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/jquery-ui.css" />
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/datepicker.css" />
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/ui.jqgrid.css" />
+<link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/dropzone.css" />
 <!-- ajax layout which only needs content area -->
 	<!-- <div class="page-header">
 							<h1>
@@ -94,8 +95,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input name="url" type="text"  placeholder="URL" class="col-xs-10 col-sm-9" />
 						</div>
 					</div>
-					
 					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 引导图： </label>
+						<div class="col-sm-10">
+							<input name="url" type="text"  placeholder="URL" class="col-xs-10 col-sm-9" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 引导图： </label>
+						<div class="col-sm-10">
+							<input name="guideMap" type="text"  placeholder="引导图路径" class="col-xs-10 col-sm-9" />
+						</div>
+					</div>
+             </form>
+             </div>
+             <div class="row">
+             <!--  <form id="guideform" class="form-horizontal" role="form" >
+             	<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 引导图： </label>
+						<div class="col-sm-10">
+							<input name="url" type="text"  placeholder="URL" class="col-xs-10 col-sm-9" />
+						</div>
+				</div>
+				</form> -->
+				<div class="col-xs-8 col-md-offset-2">
+					<form action="/ShopSys/ckeditorUploadAction_uploadGuideImg.action" class="dropzone" id="dropzone">
+						<div class="fallback">
+							<input name="guideImg"  id="guideImg" type="file"  />
+						</div>
+					</form>
+				</div>
+				
+             </div>
+             <!-- 详细信息 -->
+             <div class="row">
+             	<div class="form-group">
 					      <label style="margin-left:20px;" class="col-sm-12 " for="form-field-1">详细信息： </label>
 						<div class="col-sm-12">
 							<textarea name="detailInfo" id="editor1" rows="20" cols="80">
@@ -103,11 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            </textarea>
 			            </div>
 					</div>
-					
-             </form>
-             
              </div>
-             
              
            
 			<script src="<%=basePath %>/common/ckeditor/ckeditor.js"></script>	
@@ -157,3 +187,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- page specific plugin scripts -->
 <script src="<%=basePath %>/js/back/product.js"></script>
+<script type="text/javascript">
+	var scripts = [null,"<%=basePath %>/common/ace/assets/js/dropzone.js", null]
+	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
+	  //inline scripts related to this page
+		 jQuery(function($){
+	
+	try {
+	  Dropzone.autoDiscover = false;
+	  var myDropzone = new Dropzone("#dropzone" , {
+	    paramName: "guideImg", // The name that will be used to transfer the file
+	    maxFilesize:2.0, // MB
+	
+		addRemoveLinks : true,
+		dictDefaultMessage :
+		'<span class="bigger-150 bolder"></span>  \
+		<span class="smaller-80 grey">上传引导图</span> <br /> \
+		<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>'
+	,
+		dictResponseError: '上传失败！',
+		
+		//change the previewTemplate to use Bootstrap progress bars
+		previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
+	  });
+	  
+	   $(document).one('ajaxloadstart.page', function(e) {
+			try {
+				myDropzone.destroy();
+			} catch(e) {}
+	   });
+	
+	} catch(e) {
+	  alert('Dropzone.js does not support older browsers!');
+	}
+	
+	});
+	});
+</script>
