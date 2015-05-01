@@ -53,7 +53,7 @@ public class TestBaseServiceImpl {
     
     @Test
     public void testGetByHql(){
-    	News news=baseService.getByHQL("from News as news where news.id = 100");
+    	News news=baseService.getByHQL("from News as news where news.id = 199");
     	System.out.println("gggg");
     	System.out.println(news.getContent());
     }
