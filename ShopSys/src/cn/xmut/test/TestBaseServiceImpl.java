@@ -46,7 +46,7 @@ public class TestBaseServiceImpl {
     
     @Test
     public void testGet(){
-    	News news=baseService.getByClassNameAndId(News.class, 6);
+    	News news=baseService.getByClassNameAndId(News.class, 7);
     	System.out.println("gggg");
     	System.out.println(news.getContent());
     }
