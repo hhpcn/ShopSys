@@ -15,7 +15,6 @@ import org.apache.struts2.ServletActionContext;
 
 import com.xmut.util.DateUtil;
 
-import com.opensymphony.xwork2.ActionSupport;
 
 public class CkeditorUploadAction  extends BaseAction{
       
@@ -232,6 +231,7 @@ public class CkeditorUploadAction  extends BaseAction{
 			return "flag";
 			
 		}
+
 		
 		
 		
