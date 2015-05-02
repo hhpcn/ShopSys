@@ -1,7 +1,7 @@
 
 <title>Wysiwyg &amp; Markdown Editor - Ace Admin</title>
 
-<link rel="stylesheet" href="../../assets/css/jquery-ui.custom.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/jquery-ui.custom.css" />
 
 <!-- ajax layout which only needs content area -->
 <div class="page-header">
@@ -120,7 +120,7 @@
 		</div>
 
 		<script type="text/javascript">
-			var $path_assets = "../../assets";//this will be used in loading jQuery UI if needed!
+			var $path_assets = "/ShopSys/common/ace/assets";//this will be used in loading jQuery UI if needed!
 		</script>
 
 		<!-- PAGE CONTENT ENDS -->
@@ -129,7 +129,7 @@
 
 <!-- page specific plugin scripts -->
 <script type="text/javascript">
-	var scripts = [null,"../../assets/js/jquery-ui.custom.js","../../assets/js/jquery.ui.touch-punch.js","../../assets/js/markdown/markdown.js","../../assets/js/markdown/bootstrap-markdown.js","../../assets/js/jquery.hotkeys.js","../../assets/js/bootstrap-wysiwyg.js","../../assets/js/bootbox.js", null]
+	var scripts = [null,"/ShopSys/common/ace/assets/js/jquery-ui.custom.js","/ShopSys/common/ace/assets/js/jquery.ui.touch-punch.js","/ShopSys/common/ace/assets/js/markdown/markdown.js","/ShopSys/common/ace/assets/js/markdown/bootstrap-markdown.js","/ShopSys/common/ace/assets/js/jquery.hotkeys.js","/ShopSys/common/ace/assets/js/bootstrap-wysiwyg.js","/ShopSys/common/ace/assets/js/bootbox.js", null]
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 	  //inline scripts related to this page
 		 jQuery(function($){
@@ -290,8 +290,8 @@
 		//or we can load the jQuery UI dynamically only if needed
 		if (typeof jQuery.ui !== 'undefined') enableImageResize();
 		else {//load jQuery UI if not loaded
-			//in Ace demo ../../assets will be replaced by correct assets path
-			$.getScript("../../assets/js/jquery-ui.custom.min.js", function(data, textStatus, jqxhr) {
+			//in Ace demo /ShopSys/common/ace/assets will be replaced by correct assets path
+			$.getScript("/ShopSys/common/ace/assets/js/jquery-ui.custom.min.js", function(data, textStatus, jqxhr) {
 				enableImageResize()
 			});
 		}
