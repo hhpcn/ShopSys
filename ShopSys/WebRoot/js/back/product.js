@@ -1,4 +1,10 @@
-	var scripts = [null,"/ShopSys/common/ace/assets/js/date-time/bootstrap-datepicker.js","/ShopSys/common/ace/assets/js/jqGrid/jquery.jqGrid.src.js","/ShopSys/common/ace/assets/js/jqGrid/i18n/grid.locale-cn.js", null]
+var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
+	               "/ShopSys/common/ace/assets/js/date-time/moment.js",
+	               "/ShopSys/common/ace/assets/js/date-time/moment-with-locales.js",
+	               "/ShopSys/common/ace/assets/js/date-time/bootstrap-datetimepicker.js",
+	               "/ShopSys/common/ace/assets/js/jqGrid/jquery.jqGrid.src.js",
+	               "/ShopSys/common/ace/assets/js/jqGrid/i18n/grid.locale-cn.js",
+	               "/ShopSys/common/ace/assets/js/jquery.validate.js",null];
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 	  //inline scripts related to this page
 
@@ -21,24 +27,6 @@
 				}, 0);
 			}
 	    });
-		
-		//if your grid is inside another element, for example a tab pane, you should use its parent's width:
-		/**
-		$(window).on('resize.jqGrid', function () {
-			var parent_width = $(grid_selector).closest('.tab-pane').width();
-			$(grid_selector).jqGrid( 'setGridWidth', parent_width );
-		})
-		//and also set width when tab pane becomes visible
-		$('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		  if($(e.target).attr('href') == '#mygrid') {
-			var parent_width = $(grid_selector).closest('.tab-pane').width();
-			$(grid_selector).jqGrid( 'setGridWidth', parent_width );
-		  }
-		})
-		*/
-		
-		
-	
 	  
         //文档载入完成后，执行以下函数	
 		jQuery(grid_selector).jqGrid({
@@ -90,7 +78,7 @@
 				}, 0);
 			},
 	
-			editurl: "/ShopSys/productmange/userAction_edit.action",//nothing is saved
+			editurl: "/ShopSys/productmanage/productAction_edit.action",//nothing is saved
 			caption: "产品表格"
 	
 	
@@ -128,6 +116,7 @@
 			{ 	//navbar options
 				edit: true,
 				editicon : 'ace-icon fa fa-pencil blue',
+				editfunc : editRecord,
 				add: true,
 				addicon : 'ace-icon fa fa-plus-circle purple',
 				addfunc : addNewRecord,
@@ -142,14 +131,6 @@
 			},
 			{
 				//edit record form
-				//closeAfterEdit: true,
-				//width: 700,
-				recreateForm: true,
-				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-					style_edit_form(form);
-				}
 			},
 			{
 				//new record form
@@ -198,10 +179,49 @@
 			}
 		);
 	
-	
-	
+		//更新记录
+		function editRecord(){
+			var ids=$(grid_selector).jqGrid('getGridParam','selarrrow');
+			var strs= new Array(); 
+		    strs =ids.toString().split(",");
+		    if(strs.length>1){
+		    	alert("不能同时选中多行进行编辑，请重新选择！");
+		    	return false;
+		    }
+		    //ajax，根据id到取得记录
+			$.ajax({
+        		url:"/ShopSys/productmanage/productAction_loadProductById.action",
+        		type:"post",
+        		dataType:"json",
+        		data:{
+        			"id":strs[0]
+        		},
+        		success:function(data){
+        			var product=data.product;
+        			$("#productform input[name='id']").val(product.id);
+        			$("#productform input[name='productNo']").val(product.productNo);
+        			$("#productform input[name='productName']").val(product.productName);
+        			$("#productform input[name='price']").val(product.price);
+        			$("#productform input[name='color']").val(product.color);
+        			$("#productform select[name='brand'] option[value='"+product.brandId+"']").attr("selected", true);
+        			$("#productform select[name='kind'] option[value='"+product.kindId+"']").attr("selected", true);
+        			$("#productform input[name='url']").val(product.url);
+        			$("#productform input[name='guideMap']").val(product.guideMap);
+        			$("#productform input[name='color']").val(product.color);
+        			$("#createTime").val(product.createTime);
+        			$("#productform input[name='priority']").val(product.priority);
+        			$("#productform input[name='isPublish'][value='"+product.isPublist+"']").attr("checked",true);
+        			
+        			CKEDITOR.instances.editor1.setData(product.detailInfo);
+        			$('#productmodal').modal('show');
+        		}
+        	});
+		}
 		
+	
+		//增加一条记录，弹出对话框
 		function addNewRecord(){
+			$("#productform input[name='id']").val("");
 			$('#productmodal').modal({
 				  keyboard: false
 				});
@@ -211,26 +231,7 @@
 		
 		
 		
-		function style_edit_form(form) {
-			//enable datepicker on "sdate" field and switches for "stock" field
-			form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
-			
-			form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
-					   //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
-					  //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
-	
-					
-			//update buttons classes
-			var buttons = form.next().find('.EditButton .fm-button');
-			buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
-			buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
-			buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
-			
-			buttons = form.next().find('.navButton a');
-			buttons.find('.ui-icon').hide();
-			buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
-			buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');		
-		}
+		
 	
 		function style_delete_form(form) {
 			var buttons = form.next().find('.EditButton .fm-button');
@@ -247,7 +248,7 @@
 		}
 		function style_search_form(form) {
 			var dialog = form.closest('.ui-jqdialog');
-			var buttons = dialog.find('.EditTable')
+			var buttons = dialog.find('.EditTable');
 			buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
 			buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
 			buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
@@ -275,16 +276,7 @@
 		//it may be possible to have some custom formatter to do this as the grid is being created to prevent this
 		//or go back to default browser checkbox styles for the grid
 		function styleCheckbox(table) {
-		/**
-			$(table).find('input:checkbox').addClass('ace')
-			.wrap('<label />')
-			.after('<span class="lbl align-top" />')
-	
-	
-			$('.ui-jqgrid-labels th[id*="_cb"]:first-child')
-			.find('input.cbox[type=checkbox]').addClass('ace')
-			.wrap('<label />').after('<span class="lbl align-top" />');
-		*/
+		
 		}
 		
 	
@@ -321,7 +313,7 @@
 				var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 				
 				if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
-			})
+			});
 		}
 	
 		function enableTooltips(table) {
@@ -329,38 +321,58 @@
 			$(table).find('.ui-pg-div').tooltip({container:'body'});
 		}
 	
-		//var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
-	
 		$(document).one('ajaxloadstart.page', function(e) {
 			$(grid_selector).jqGrid('GridUnload');
 			$('.ui-jqdialog').remove();
 		});
 		
 		
+		function formValidate(){
+			//增加表单验证
+			 $("#productform").validate({
+			        rules: {
+			        	productNo: "required"
+			        },
+			        messages: {
+			        	productNo: "请输入姓名"
+			        }
+			  });
+		}
+		
+
+		
+		
+		
 		
 		
 		//点击对话框保存按钮，保存产品信息
 		$("#saveproduct").on("click",function(){
+			var productId=$("#productform input[name='id']").val();
 			var productNo = $("#productform input[name='productNo']").val();
 			var productName=$("#productform input[name='productName']").val();
 			var price=$("#productform input[name='price']").val();
 			var color=$("#productform input[name='color']").val();
 			var brandId=$("#productform select[name='brand'] option:selected").val();
+			var kindId=$("#productform select[name='kind'] option:selected").val(); //类别id
 			var url=$("#productform input[name='url']").val();
+			var createTime=$("#createTime").val();
+			var priority=$("#productform input[name='priority']").val();
+			var isPublish=$("#productform input[name='isPublish']:checked").val();
+			var guideMap=$("#productform input[name='guideMap']").val();
 			var detailInfo=CKEDITOR.instances.editor1.getData();
-			alert(detailInfo);
 			var imgUrls="";
 			 retImgArr = detailInfo.match(/src\s*=\s*[\"|\']?\s*[^>\"\'\s]*\.(jpg|jpeg|png|gif|bmp)[\"|\']?/gi);
-			 for(var i=0;i<retImgArr.length;i++)
-			 {
-			    relativeImgArr=retImgArr[i].match(/\/img\s*[^>\"\'\s]*\.(jpg|jpeg|png|gif|bmp)/gi);
-			    if(i>0)
-				    imgUrls+="|";
-			    
-			    imgUrls=imgUrls+relativeImgArr[0];
-			    
+			 if(retImgArr!=null){
+				 for(var i=0;i<retImgArr.length;i++)
+				 {
+				    relativeImgArr=retImgArr[i].match(/\/img\s*[^>\"\'\s]*\.(jpg|jpeg|png|gif|bmp)/gi);
+				    if(i>0)
+					    imgUrls+="|";
+				    imgUrls=imgUrls+relativeImgArr[0];
+				    
+				 }
 			 }
-			 
+			
 			 
 			 
 			$.ajax({
@@ -368,23 +380,145 @@
         		type:"post",
         		dataType:"json",
         		data:{
+        			    "product.id":productId,
         				"product.productNo":productNo,
         				"product.productName":productName,
         				"product.price":price,
         				"product.color":brandId,
         				"product.url":url,
         				"product.brandId":brandId,
+        				"product.kindId":kindId,
         				"product.imgUrls":imgUrls,
-        				"product.detailInfo":detailInfo
+        				"product.detailInfo":detailInfo,
+        				"product.createTime":createTime,
+        				"product.priority":priority,
+        				"product.isPublish":isPublish,
+        				"product.guideMap":guideMap,
+        				"product.color":color
+        				
+        				
         		},
         		success:function(d){
+        			
         			$('#productmodal').modal('hide');
         			jQuery(grid_selector).jqGrid().trigger("reloadGrid");
-        			
+        			//清空表单
+        			$(':input','#productform').val(''); 
+        			CKEDITOR.instances.editor1.setData("");
         		}
         	});
 			
 		});
 		
+		//点击取消按钮时，也清空表单
+		$("#canclebutton").on("click",function(){
+			//清空表单
+			$(':input','#productform').val(''); 
+			CKEDITOR.instances.editor1.setData("");
+		});
+		
+
+		//初始化增加产品界面的时间
+		var nowTime=getNowTime();
+		$("#createTime").val(nowTime);
+		//日期控件
+		$('#createTime').datetimepicker(
+				{
+                    language: 'zh-CN'
+				}
+			).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+		
+		//初始化优先级为10
+		$("#productform input[name='priority']").val(10);
+		
 	});
+	
+	
+	
+	
+	
+	
+	
+	
+	try {
+		  Dropzone.autoDiscover = false;
+		  var myDropzone = new Dropzone("#dropzone" , {
+		    paramName: "guideImg", // The name that will be used to transfer the file
+		    maxFilesize:2.0, // MB
+			maxFiles: 1,
+			addRemoveLinks : true,
+			init:function(){
+				this.on("success",function(data){
+					var jsonObj=eval('(' + data.xhr.responseText + ')');//转换为json对象
+					$("#productform input[name='guideMap']").val(jsonObj.guideImgUrl);
+				});
+				this.on("maxfilesexceeded",function(){
+					alert("引导图只能有一张");
+				});
+				this.on("removedfile",function(){
+				var message=$("#productform input[name='guideMap']").val();
+				$.post("/ShopSys/ckeditorUploadAction_removeFile.action",{message:message},function(data){
+					$("#productform input[name='guideMap']").val("");
+				});
+				
+			});
+				
+			},
+			dictDefaultMessage :
+			'<span class="bigger-150 bolder"></span>  \
+			<span class="smaller-80 grey">上传引导图</span> <br /> \
+			<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>'
+		,
+			dictResponseError: '上传失败！',
+			dictRemoveFile:'删除',
+		
+			
+			//change the previewTemplate to use Bootstrap progress bars
+			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
+		  });
+		  
+		   $(document).one('ajaxloadstart.page', function(e) {
+				try {
+					myDropzone.destroy();
+				} catch(e) {}
+		   });
+		
+		} catch(e) {
+		  alert('不支持该版本的浏览器!');
+		}
+	
+	
+	
+	//获得现在的时间
+	function getNowTime(){
+		var myDate = new Date();
+		var year=myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+		var month=myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
+		var date=myDate.getDate();        //获取当前日(1-31)
+		var hours=myDate.getHours();       //获取当前小时数(0-23)
+		var hourslocale="";
+		if(hours>=12){
+			hourslocale="下午"+hours%12+"点";
+		}else{
+			hourslocale="上午"+hours+"点";
+		}
+		var smonth="";
+		if(month<10){
+			smonth="0"+month;
+		}else{
+			smonth=month;
+		}
+		var sdate="";
+		if(date<10){
+			sdate="0"+date;
+		}else{
+			sdate=date;
+		}
+		var minutes=myDate.getMinutes();     //获取当前分钟数(0-59)
+		var nowTime=year+"-"+smonth+"-"+sdate+" "+hourslocale+minutes;
+		return nowTime;
+	}
+	
 	});

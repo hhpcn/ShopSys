@@ -21,7 +21,10 @@ import com.shopsys.personnel.service.UserService;
 import com.xmut.base.BaseAction;
 import com.xmut.util.WebUtil;
 
-
+/**
+ * @author hhp
+ *
+ */
 /**
  * @author hhp
  *
@@ -33,27 +36,16 @@ public class UserAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = -5966619251987791667L;
 	private UserService userService;
+	
 	private String userName;//用户名
 	private String password;//密码
-    private String id;
     private String roleName;
     private String status;
 	private User user;
 	
 	
-
-	private String filters;//条件搜索
-	private String searchField;		//单字段查询的时候，查询字段名称
-	private String searchString;	//单字段查询的时候，查询字段的值
-	private String searchOper;		//单字段查询的时候，查询的操作
-	private String oper;//编辑表格行时，传过来的操作类型。
-	
-	
-
-	
-	
-
 	public String login() {
+		
 	System.out.println("login");
 		if (userName.equals("admin")&&password.equals("123456")) {
 			System.out.println(userName+": "+password);
@@ -105,7 +97,6 @@ public class UserAction extends BaseAction {
 		return "list";
 	}
 	
-
 	//行编辑：更新，删除
 	public String edit() {
 		
@@ -125,7 +116,6 @@ public class UserAction extends BaseAction {
 			userService.deleteByClassAndIds(User.class, intIds);
 			flag=true;
 		}
-
 		return "flag";
 	}
 	
@@ -143,112 +133,6 @@ public class UserAction extends BaseAction {
 		this.password = password;
 	}
 
-	public String getPage() {
-		return page;
-	}
-
-	public void setPage(String page) {
-		this.page = page;
-	}
-
-	public String getRows() {
-		return rows;
-	}
-
-	public void setRows(String rows) {
-		this.rows = rows;
-	}
-
-	public Boolean get_search() {
-		return _search;
-	}
-
-	public void set_search(Boolean _search) {
-		this._search = _search;
-	}
-
-	public String getNd() {
-		return nd;
-	}
-
-	public void setNd(String nd) {
-		this.nd = nd;
-	}
-
-	public String getSidx() {
-		return sidx;
-	}
-
-	public void setSidx(String sidx) {
-		this.sidx = sidx;
-	}
-
-	public String getSord() {
-		return sord;
-	}
-
-	public void setSord(String sord) {
-		this.sord = sord;
-	}
-
-	public String getFilters() {
-		return filters;
-	}
-	public String getStr() {
-		return str;
-	}
-
-
-	public void setStr(String str) {
-		this.str = str;
-	}
-
-
-	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public void setFilters(String filters) {
-		this.filters = filters;
-	}
-
-	public String getSearchField() {
-		return searchField;
-	}
-
-	public void setSearchField(String searchField) {
-		this.searchField = searchField;
-	}
-
-	public String getSearchString() {
-		return searchString;
-	}
-
-	public void setSearchString(String searchString) {
-		this.searchString = searchString;
-	}
-
-	public String getSearchOper() {
-		return searchOper;
-	}
-
-	public void setSearchOper(String searchOper) {
-		this.searchOper = searchOper;
-	}
-
-	public String getOper() {
-		return oper;
-	}
-
-	public void setOper(String oper) {
-		this.oper = oper;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -256,15 +140,6 @@ public class UserAction extends BaseAction {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -289,5 +164,8 @@ public class UserAction extends BaseAction {
 		this.status = status;
 	}
 
+
+	
+	
 	
 }

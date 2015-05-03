@@ -15,6 +15,14 @@ public class Product implements java.io.Serializable{
 	private String brandName;
 	private String guideMap;
 	private String imgUrls;
+	private Integer kindId;
+	private String kindName;
+	private String createTime;
+	private Integer priority=10;
+	private Boolean isPublish=true;
+	
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -87,9 +95,36 @@ public class Product implements java.io.Serializable{
 	public void setImgUrls(String imgUrls) {
 		this.imgUrls = imgUrls;
 	}
-	
-	
-	
+	public Integer getKindId() {
+		return kindId;
+	}
+	public void setKindId(Integer kindId) {
+		this.kindId = kindId;
+	}
+	public String getKindName() {
+		return kindName;
+	}
+	public void setKindName(String kindName) {
+		this.kindName = kindName;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public Integer getPriority() {
+		return priority;
+	}
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+	public Boolean getIsPublish() {
+		return isPublish;
+	}
+	public void setIsPublish(Boolean isPublish) {
+		this.isPublish = isPublish;
+	}
 	
 	
 }

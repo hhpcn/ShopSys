@@ -9,7 +9,7 @@ public class BaseAction extends ActionSupport{
 	private static final long serialVersionUID = 2817071984746760965L;
 	public Map<String, Object> dataMap;
 	public Boolean flag=false;
-	
+    public String id;
 	
 	public String page;//当前页
 	public String rows;
@@ -142,6 +142,15 @@ public class BaseAction extends ActionSupport{
 	public void setOper(String oper) {
 		this.oper = oper;
 	}
+
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	
 	
 	

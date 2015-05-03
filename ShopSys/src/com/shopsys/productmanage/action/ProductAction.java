@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shopsys.common.JqgridUtil;
+import com.shopsys.personnel.model.User;
 import com.shopsys.productmanage.model.Product;
 import com.shopsys.productmanage.service.ProductService;
 import com.xmut.base.BaseAction;
@@ -64,16 +65,36 @@ public class ProductAction extends BaseAction {
 	
 	
 	public String addProduct() {
-		int i=productService.save(product);
-		if (i>0) {
+		System.out.println();
+		productService.saveOrUpdate(product);
+			flag=true;
+		return "flag";
+	}
+	
+	/**
+	 * 行编辑：更新，删除
+	 * @return
+	 */
+	public String edit() {
+		
+		Integer[] intIds = JqgridUtil.idToIntIds(id);
+		if ("del".equalsIgnoreCase(oper)) {
+			productService.deleteByClassAndIds(Product.class, intIds);
 			flag=true;
 		}
 		return "flag";
 	}
 	
-	
-	
-	
+	/**
+	 * 根据id获取记录
+	 * @return
+	 */
+	public String loadProductById() {
+		product = productService.getByClassNameAndId(Product.class, Integer.parseInt(id));
+		dataMap=new HashMap<String, Object>();
+		dataMap.put("product", product);
+		return "dataMap";
+	}
 	
 	public ProductService getProductService() {
 		return productService;

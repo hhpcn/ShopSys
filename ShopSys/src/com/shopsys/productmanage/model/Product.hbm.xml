@@ -22,7 +22,7 @@
             <column name="price"  />
         </property>
         <property name="url" type="java.lang.String" >
-            <column name="url" length="45" />
+            <column name="url" length="200" />
         </property>
          <property name="stock" type="java.lang.Integer" >
             <column name="stock"  />
@@ -42,6 +42,22 @@
         <property name="imgUrls" type="java.lang.String" >
             <column name="imgUrls" length="200" />
         </property>
+         <property name="kindId" type="java.lang.Integer" >
+            <column name="kindId" />
+        </property>
+         <property name="kindName" type="java.lang.String" >
+            <column name="kindName" length="40" />
+        </property>
+         <property name="createTime" type="java.lang.String" >
+            <column name="createTime" length="40" />
+        </property>
+         <property name="priority" type="java.lang.Integer" >
+            <column name="priority" />
+        </property> 
+        <property name="isPublish" type="java.lang.Boolean" >
+            <column name="isPublish" />
+        </property> 
+
     </class>
     
 </hibernate-mapping>

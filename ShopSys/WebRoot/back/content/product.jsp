@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+ String path = request.getContextPath();
+ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 
@@ -9,7 +9,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/jquery-ui.css" />
+
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/datepicker.css" />
+<link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/ui.jqgrid.css" />
 <link rel="stylesheet" href="<%=basePath %>/common/ace/assets/css/dropzone.css" />
 <!-- ajax layout which only needs content area -->
@@ -57,6 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <div class="row">
              	<form id="productform" class="form-horizontal" role="form">
 		             		<!-- #section:elements.form -->
+		            <input name="id" value="" style="display:none;"/>
 					<div class="form-group">
 						<label class="col-sm-2 control-label no-padding-right" > 产品编号： </label>
 		
@@ -88,6 +93,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<option value="3">Arizona3</option>
 							</select>
 						</div>
+						<label class="col-sm-2 control-label no-padding-right" >  类别： </label>
+						<div class="col-sm-4">
+							<select name="kind" class=" col-xs-10 col-sm-9"   data-placeholder="选择类别">
+										<option value="0"> 常用 </option>
+										<option value="1">户外</option>
+										<option value="2">文具</option>
+										<option value="3">测量</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 优先级： </label>
+						<div class="col-sm-4">
+							<input name="priority" type="text"  placeholder="优先级" class="col-xs-10 col-sm-9" />
+						</div>
+						<label class="col-sm-2 control-label no-padding-right" > 创建时间： </label>
+						<div class="col-sm-4">
+							<div class="input-group">
+									<input name="createTime" id="createTime" type="text" class="form-control"  />
+									<span class="input-group-addon">
+										<i class="fa fa-clock-o bigger-90"></i>
+									</span>
+							</div>
+						</div>
+						
+						
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 是否发布： </label>
+						<div class="col-sm-6">
+							<div class="control-group">
+							  <div class="radio" >
+								<div class="col-sm-3">
+								<label>
+								<input class="ace" type="radio" value="true" name="isPublish" checked="checked">
+								<span class="lbl">是</span>
+								</label>
+								</div>
+								<div class="col-sm-3">
+								<label>
+								<input class="ace" type="radio" value="false" name="isPublish">
+								<span class="lbl">否</span>
+								</label>
+								</div>
+							 </div>
+						   </div>
+						</div>
+						
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label no-padding-right" > URL： </label>
@@ -155,7 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       </div>
       <div class="modal-footer" style="height:55px;">
-	        <button type="button" class="btn btn-white btn-info btn-round" data-dismiss="modal">
+	        <button id="canclebutton" type="button" class="btn btn-white btn-info btn-round" data-dismiss="modal">
 	        	<i class="ace-icon fa fa-times  red2"></i>取消
 	        </button>
 	        <button id="saveproduct" type="button" class="btn btn-white btn-info btn-round" >
@@ -173,71 +226,3 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- page specific plugin scripts -->
 <script src="<%=basePath %>/js/back/product.js"></script>
-<script type="text/javascript">
-	var scripts = [null,"<%=basePath %>/common/ace/assets/js/dropzone.js", null]
-	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
-	  //inline scripts related to this page
-		 jQuery(function($){
-	
-	try {
-	  Dropzone.autoDiscover = false;
-	  var myDropzone = new Dropzone("#dropzone" , {
-	    paramName: "guideImg", // The name that will be used to transfer the file
-	    maxFilesize:2.0, // MB
-		maxFiles: 1,
-		addRemoveLinks : true,
-		/*	complete:function(data){
-			var jsonObj=eval('(' + data.xhr.responseText + ')');//转换为json对象
-			$("#productform input[name='guideMap']").val(jsonObj.guideImgUrl);
-		},
-		maxfilesexceeded:function(){
-			alert("引导图只能有一张");
-		},
-		removedfile:function(){
-			var message=$("#productform input[name='guideMap']").val();
-			$.post("/ShopSys/ckeditorUploadAction_removeFile.action",{message:message});
-			
-		}, */
-		init:function(){
-			this.on("success",function(data){
-				var jsonObj=eval('(' + data.xhr.responseText + ')');//转换为json对象
-				$("#productform input[name='guideMap']").val(jsonObj.guideImgUrl);
-			});
-			this.on("maxfilesexceeded",function(){
-				alert("引导图只能有一张");
-			});
-			this.on("removedfile",function(){
-			var message=$("#productform input[name='guideMap']").val();
-			$.post("/ShopSys/ckeditorUploadAction_removeFile.action",{message:message},function(data){
-				$("#productform input[name='guideMap']").val("");
-			});
-			
-		});
-			
-		},
-		dictDefaultMessage :
-		'<span class="bigger-150 bolder"></span>  \
-		<span class="smaller-80 grey">上传引导图</span> <br /> \
-		<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>'
-	,
-		dictResponseError: '上传失败！',
-		dictRemoveFile:'删除',
-	
-		
-		//change the previewTemplate to use Bootstrap progress bars
-		previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
-	  });
-	  
-	   $(document).one('ajaxloadstart.page', function(e) {
-			try {
-				myDropzone.destroy();
-			} catch(e) {}
-	   });
-	
-	} catch(e) {
-	  alert('不支持该版本的浏览器!');
-	}
-	
-	});
-	});
-</script>

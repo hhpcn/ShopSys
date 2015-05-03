@@ -674,10 +674,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<!-- ace scripts -->
 		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.scroller.js"></script>
-		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.colorpicker.js"></script>
 		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.fileinput.js"></script>
 		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.typeahead.js"></script>
-		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.wysiwyg.js"></script>
 		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.spinner.js"></script>
 		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.treeview.js"></script>
 		<script src="<%=basePath %>/common/ace/assets/js/ace/elements.wizard.js"></script>
