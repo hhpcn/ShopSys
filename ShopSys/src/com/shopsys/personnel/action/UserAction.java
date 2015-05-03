@@ -36,7 +36,6 @@ public class UserAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = -5966619251987791667L;
 	private UserService userService;
-	
 	private String userName;//用户名
 	private String password;//密码
     private String id;
@@ -52,21 +51,32 @@ public class UserAction extends BaseAction {
 	private String nd;
 	private String sidx;
 	private String sord;
+<<<<<<< HEAD
+
+	private String str;
+	
+=======
 	private String filters;//条件搜索
 	private String searchField;		//单字段查询的时候，查询字段名称
 	private String searchString;	//单字段查询的时候，查询字段的值
 	private String searchOper;		//单字段查询的时候，查询的操作
 	private String oper;//编辑表格行时，传过来的操作类型。
+>>>>>>> refs/remotes/origin/master
 	
 	
 
 	
 	
 	public String login() {
+<<<<<<< HEAD
+		if (username.equals("admin")&&password.equals("123456")) {
+			System.out.println(username+": "+password);
+=======
 		
 	System.out.println("login");
 		if (userName.equals("admin")&&password.equals("123456")) {
 			System.out.println(userName+": "+password);
+>>>>>>> refs/remotes/origin/master
 			User user = new User();
 			user.setUserName("admin");
 			WebUtil.add2Session(WebUtil.KEY_LOGIN_USER_SESSION, user);
@@ -115,6 +125,16 @@ public class UserAction extends BaseAction {
 		return "list";
 	}
 	
+<<<<<<< HEAD
+	public String register()
+	{
+		System.out.println(user.getUserName());
+		str="caotama";//返回给前台（浏览器）
+	    return "snsns";
+		
+		
+		
+=======
 	//行编辑：更新，删除
 	public String edit() {
 		
@@ -135,6 +155,7 @@ public class UserAction extends BaseAction {
 			flag=true;
 		}
 		return "operation";
+>>>>>>> refs/remotes/origin/master
 	}
 	
 	public UserService getUserService() {
@@ -203,6 +224,28 @@ public class UserAction extends BaseAction {
 		return filters;
 	}
 
+<<<<<<< HEAD
+	public String getStr() {
+		return str;
+	}
+
+
+	public void setStr(String str) {
+		this.str = str;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+=======
 	public void setFilters(String filters) {
 		this.filters = filters;
 	}
@@ -282,5 +325,6 @@ public class UserAction extends BaseAction {
 
 	
 	
+>>>>>>> refs/remotes/origin/master
 	
 }

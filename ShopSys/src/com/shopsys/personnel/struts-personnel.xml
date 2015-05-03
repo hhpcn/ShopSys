@@ -5,6 +5,10 @@
 	<package name="struts-personnel" namespace="/personnel" extends="struts-base">
 		<action name="userAction_*" class="userAction" method="{1}">
 			<result name="loginsuccess" type="redirect">/back/index.jsp</result>
+			
+			<result name="snsns" type="json">
+				<param name="root">str</param>
+			</result>
 		</action>
 	</package>
 </struts> 

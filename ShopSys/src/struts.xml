@@ -52,8 +52,7 @@
 		    <result name="SUCCESS">/WEB-INF/ajax/content/{1}.html</result>
 		</action>
 </package>
-
-	<include file="cn/xmut/test/struts-test.xml"></include>
-	<include file="com/shopsys/personnel/struts-personnel.xml"></include>
+	<!-- <include file="cn/xmut/test/struts-test.xml"></include>
+	<include file="com/shopsys/personnel/struts-personnel.xml"></include> -->
  
  </struts>  
