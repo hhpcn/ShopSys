@@ -96,11 +96,10 @@
 						<label class="col-sm-2 control-label no-padding-right" >  类别： </label>
 						<div class="col-sm-4">
 							<select name="kind" class=" col-xs-10 col-sm-9"   data-placeholder="选择类别">
-										<option value="0">常用</option>
+										<option value="0"> 常用 </option>
 										<option value="1">户外</option>
 										<option value="2">文具</option>
 										<option value="3">测量</option>
-										<option value="3">运动</option>
 							</select>
 						</div>
 					</div>
