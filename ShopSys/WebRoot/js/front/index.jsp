@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     This is my JSP page. 
-    给发个方法
+    给发个方法个，、
     
     <br>
   </body>
