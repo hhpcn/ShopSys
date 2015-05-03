@@ -5,6 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 
+
 <title>管理系统</title>
 
 <!-- ajax layout which only needs content area -->
