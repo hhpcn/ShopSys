@@ -57,6 +57,7 @@
         <property name="isPublish" type="java.lang.Boolean" >
             <column name="isPublish" />
         </property> 
+
     </class>
     
 </hibernate-mapping>

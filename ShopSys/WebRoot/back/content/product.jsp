@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+ String path = request.getContextPath();
+ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 
@@ -226,5 +226,3 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- page specific plugin scripts -->
 <script src="<%=basePath %>/js/back/product.js"></script>
-
-

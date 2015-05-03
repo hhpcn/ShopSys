@@ -1,4 +1,4 @@
-	var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
+var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 	               "/ShopSys/common/ace/assets/js/date-time/moment.js",
 	               "/ShopSys/common/ace/assets/js/date-time/moment-with-locales.js",
 	               "/ShopSys/common/ace/assets/js/date-time/bootstrap-datetimepicker.js",
@@ -520,10 +520,5 @@
 		var nowTime=year+"-"+smonth+"-"+sdate+" "+hourslocale+minutes;
 		return nowTime;
 	}
-	
-	
-	
-	
-	
 	
 	});
