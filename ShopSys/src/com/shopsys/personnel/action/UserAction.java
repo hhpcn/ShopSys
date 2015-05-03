@@ -21,10 +21,7 @@ import com.shopsys.personnel.service.UserService;
 import com.xmut.base.BaseAction;
 import com.xmut.util.WebUtil;
 
-/**
- * @author hhp
- *
- */
+
 /**
  * @author hhp
  *
@@ -44,39 +41,22 @@ public class UserAction extends BaseAction {
 	private User user;
 	
 	
-	
-	private String page;//当前页
-	private String rows;
-	private Boolean _search;//是否条件搜索
-	private String nd;
-	private String sidx;
-	private String sord;
-<<<<<<< HEAD
 
-	private String str;
-	
-=======
 	private String filters;//条件搜索
 	private String searchField;		//单字段查询的时候，查询字段名称
 	private String searchString;	//单字段查询的时候，查询字段的值
 	private String searchOper;		//单字段查询的时候，查询的操作
 	private String oper;//编辑表格行时，传过来的操作类型。
->>>>>>> refs/remotes/origin/master
 	
 	
 
 	
 	
+
 	public String login() {
-<<<<<<< HEAD
-		if (username.equals("admin")&&password.equals("123456")) {
-			System.out.println(username+": "+password);
-=======
-		
 	System.out.println("login");
 		if (userName.equals("admin")&&password.equals("123456")) {
 			System.out.println(userName+": "+password);
->>>>>>> refs/remotes/origin/master
 			User user = new User();
 			user.setUserName("admin");
 			WebUtil.add2Session(WebUtil.KEY_LOGIN_USER_SESSION, user);
@@ -125,16 +105,7 @@ public class UserAction extends BaseAction {
 		return "list";
 	}
 	
-<<<<<<< HEAD
-	public String register()
-	{
-		System.out.println(user.getUserName());
-		str="caotama";//返回给前台（浏览器）
-	    return "snsns";
-		
-		
-		
-=======
+
 	//行编辑：更新，删除
 	public String edit() {
 		
@@ -154,8 +125,8 @@ public class UserAction extends BaseAction {
 			userService.deleteByClassAndIds(User.class, intIds);
 			flag=true;
 		}
-		return "operation";
->>>>>>> refs/remotes/origin/master
+
+		return "flag";
 	}
 	
 	public UserService getUserService() {
@@ -223,8 +194,6 @@ public class UserAction extends BaseAction {
 	public String getFilters() {
 		return filters;
 	}
-
-<<<<<<< HEAD
 	public String getStr() {
 		return str;
 	}
@@ -243,9 +212,7 @@ public class UserAction extends BaseAction {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-=======
+	
 	public void setFilters(String filters) {
 		this.filters = filters;
 	}
@@ -322,9 +289,5 @@ public class UserAction extends BaseAction {
 		this.status = status;
 	}
 
-
-	
-	
->>>>>>> refs/remotes/origin/master
 	
 }

@@ -46,14 +46,14 @@ public class TestBaseServiceImpl {
     
     @Test
     public void testGet(){
-    	News news=baseService.getByClassNameAndId(News.class, 1);
+    	News news=baseService.getByClassNameAndId(News.class, 8);
     	System.out.println("gggg");
     	System.out.println(news.getContent());
     }
     
     @Test
     public void testGetByHql(){
-    	News news=baseService.getByHQL("from News as news where news.id = 100");
+    	News news=baseService.getByHQL("from News as news where news.id = 199");
     	System.out.println("gggg");
     	System.out.println(news.getContent());
     }
@@ -76,7 +76,6 @@ public class TestBaseServiceImpl {
     public void testListByHQL(){
     	List<News> news=baseService.listByHQL("from News");
     	System.out.println(news.get(0).getTitle());
-    	
     }
     
     @Test
