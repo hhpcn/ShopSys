@@ -1,13 +1,13 @@
 
 <title>Form Elements - Ace Admin</title>
 
-<link rel="stylesheet" href="../../assets/css/jquery-ui.custom.css" />
-<link rel="stylesheet" href="../../assets/css/chosen.css" />
-<link rel="stylesheet" href="../../assets/css/datepicker.css" />
-<link rel="stylesheet" href="../../assets/css/bootstrap-timepicker.css" />
-<link rel="stylesheet" href="../../assets/css/daterangepicker.css" />
-<link rel="stylesheet" href="../../assets/css/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="../../assets/css/colorpicker.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/jquery-ui.custom.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/chosen.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/datepicker.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/daterangepicker.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="/ShopSys/common/ace/assets/css/colorpicker.css" />
 
 <!-- ajax layout which only needs content area -->
 <div class="page-header">
@@ -1339,10 +1339,24 @@
 <!-- page specific plugin scripts -->
 
 <!--[if lte IE 8]>
-  <script src="../../assets/js/excanvas.js"></script>
+  <script src="/ShopSys/common/ace/assets/js/excanvas.js"></script>
 <![endif]-->
 <script type="text/javascript">
-	var scripts = [null,"../../assets/js/jquery-ui.custom.js","../../assets/js/jquery.ui.touch-punch.js","../../assets/js/chosen.jquery.js","../../assets/js/fuelux/fuelux.spinner.js","../../assets/js/date-time/bootstrap-datepicker.js","../../assets/js/date-time/bootstrap-timepicker.js","../../assets/js/date-time/moment.js","../../assets/js/date-time/daterangepicker.js","../../assets/js/date-time/bootstrap-datetimepicker.js","../../assets/js/bootstrap-colorpicker.js","../../assets/js/jquery.knob.js","../../assets/js/jquery.autosize.js","../../assets/js/jquery.inputlimiter.1.3.1.js","../../assets/js/jquery.maskedinput.js","../../assets/js/bootstrap-tag.js", null]
+	var scripts = [null,"/ShopSys/common/ace/assets/js/jquery-ui.custom.js",
+	"/ShopSys/common/ace/assets/js/jquery.ui.touch-punch.js",
+	"/ShopSys/common/ace/assets/js/chosen.jquery.js",
+	"/ShopSys/common/ace/assets/js/fuelux/fuelux.spinner.js",
+	"/ShopSys/common/ace/assets/js/date-time/bootstrap-datepicker.js",
+	"/ShopSys/common/ace/assets/js/date-time/bootstrap-timepicker.js",
+	"/ShopSys/common/ace/assets/js/date-time/moment.js",
+	"/ShopSys/common/ace/assets/js/date-time/daterangepicker.js",
+	"/ShopSys/common/ace/assets/js/date-time/bootstrap-datetimepicker.js",
+	"/ShopSys/common/ace/assets/js/bootstrap-colorpicker.js",
+	"/ShopSys/common/ace/assets/js/jquery.knob.js",
+	"/ShopSys/common/ace/assets/js/jquery.autosize.js",
+	"/ShopSys/common/ace/assets/js/jquery.inputlimiter.1.3.1.js",
+	"/ShopSys/common/ace/assets/js/jquery.maskedinput.js",
+	"/ShopSys/common/ace/assets/js/bootstrap-tag.js", null]
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 	  //inline scripts related to this page
 		 jQuery(function($) {

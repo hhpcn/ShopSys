@@ -103,6 +103,7 @@
 		    <list>
 			    <value>classpath:/cn/xmut/test/model</value>
 			    <value>classpath:/com/shopsys/personnel/model</value>
+			    <value>classpath:/com/shopsys/productmanage/model</value>
 		    </list>
 	    </property>
 	    
@@ -171,5 +172,7 @@
         </property>
     </bean>
 	
+	<bean id="ckeditorUploadAction" class="com.xmut.base.CkeditorUploadAction" parent="baseAction">
+    </bean>
 	
 </beans>
