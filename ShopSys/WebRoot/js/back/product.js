@@ -35,15 +35,15 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 			mtype: 'POST', 
 			datatype: "json",
 			height: 300,
-			colNames:[' ', 'ID','产品编号','名称', '价格','颜色','品牌','url'],
+			colNames:['', 'ID','产品编号','名称', '价格','颜色','品牌','url'],
 			colModel:[
-				{name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
+				{name:'myac',index:'', width:50, fixed:true, sortable:false, resize:false,
 					formatter:'actions', 
 					formatoptions:{ 
 						keys:true,
 						//delbutton: false,//disable delete button
 						delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
-						//editformbutton:true,
+						editbutton:false//禁用航编辑按钮
 						//editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
 					}
 				},
@@ -77,39 +77,14 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 					enableTooltips(table);
 				}, 0);
 			},
-	
 			editurl: "/ShopSys/productmanage/productAction_edit.action",//nothing is saved
 			caption: "产品表格"
-	
-	
 	
 	
 		});
 		$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 		
 		
-	
-		//enable search/filter toolbar
-		//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-		//jQuery(grid_selector).filterToolbar({});
-	
-	
-		//switch element when editing inline
-		function aceSwitch( cellvalue, options, cell ) {
-			setTimeout(function(){
-				$(cell) .find('input[type=checkbox]')
-					.addClass('ace ace-switch ace-switch-5')
-					.after('<span class="lbl"></span>');
-			}, 0);
-		}
-		//enable datepicker
-		function pickDate( cellvalue, options, cell ) {
-			setTimeout(function(){
-				$(cell) .find('input[type=text]')
-						.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
-			}, 0);
-		}
-	
 	
 		//navButtons
 		jQuery(grid_selector).jqGrid('navGrid',pager_selector,
@@ -128,6 +103,7 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 				refreshicon : 'ace-icon fa fa-refresh green',
 				view: true,
 				viewicon : 'ace-icon fa fa-search-plus grey',
+				viewfunc : viewRecord
 			},
 			{
 				//edit record form
@@ -171,67 +147,8 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 			},
 			{
 				//view record form
-				recreateForm: true,
-				beforeShowForm: function(e){
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-				}
 			}
 		);
-	
-		//更新记录
-		function editRecord(){
-			var ids=$(grid_selector).jqGrid('getGridParam','selarrrow');
-			var strs= new Array(); 
-		    strs =ids.toString().split(",");
-		    if(strs.length>1){
-		    	alert("不能同时选中多行进行编辑，请重新选择！");
-		    	return false;
-		    }
-		    //ajax，根据id到取得记录
-			$.ajax({
-        		url:"/ShopSys/productmanage/productAction_loadProductById.action",
-        		type:"post",
-        		dataType:"json",
-        		data:{
-        			"id":strs[0]
-        		},
-        		success:function(data){
-        			var product=data.product;
-        			$("#productform input[name='id']").val(product.id);
-        			$("#productform input[name='productNo']").val(product.productNo);
-        			$("#productform input[name='productName']").val(product.productName);
-        			$("#productform input[name='price']").val(product.price);
-        			$("#productform input[name='color']").val(product.color);
-        			$("#productform select[name='brand'] option[value='"+product.brandId+"']").attr("selected", true);
-        			$("#productform select[name='kind'] option[value='"+product.kindId+"']").attr("selected", true);
-        			$("#productform input[name='url']").val(product.url);
-        			$("#productform input[name='guideMap']").val(product.guideMap);
-        			$("#productform input[name='color']").val(product.color);
-        			$("#createTime").val(product.createTime);
-        			$("#productform input[name='priority']").val(product.priority);
-        			$("#productform input[name='isPublish'][value='"+product.isPublist+"']").attr("checked",true);
-        			
-        			CKEDITOR.instances.editor1.setData(product.detailInfo);
-        			$('#productmodal').modal('show');
-        		}
-        	});
-		}
-		
-	
-		//增加一条记录，弹出对话框
-		function addNewRecord(){
-			$("#productform input[name='id']").val("");
-			$('#productmodal').modal({
-				  keyboard: false
-				});
-		}
-		
-		
-		
-		
-		
-		
 	
 		function style_delete_form(form) {
 			var buttons = form.next().find('.EditButton .fm-button');
@@ -327,23 +244,63 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 		});
 		
 		
-		function formValidate(){
-			//增加表单验证
-			 $("#productform").validate({
-			        rules: {
-			        	productNo: "required"
-			        },
-			        messages: {
-			        	productNo: "请输入姓名"
-			        }
-			  });
-		}
+	
 		
 
+		//更新记录
+		function editRecord(){
+			var ids=$(grid_selector).jqGrid('getGridParam','selarrrow');
+			var strs= new Array(); 
+		    strs =ids.toString().split(",");
+		    if(strs.length>1){
+		    	alert("不能同时选中多行进行编辑，请重新选择！");
+		    	return false;
+		    }
+		    //ajax，根据id到取得记录
+			$.ajax({
+        		url:"/ShopSys/productmanage/productAction_loadProductById.action",
+        		type:"post",
+        		dataType:"json",
+        		data:{
+        			"id":strs[0]
+        		},
+        		success:function(data){
+        			var product=data.product;
+        			alert(product.id);
+        			$("#productform input[name='id']").val(product.id);
+        			$("#productform input[name='productNo']").val(product.productNo);
+        			$("#productform input[name='productName']").val(product.productName);
+        			$("#productform input[name='price']").val(product.price);
+        			$("#productform input[name='color']").val(product.color);
+        			alert("brand:"+product.brandId);
+        			alert("kind:"+product.kindId);
+        			
+        			$("#productform select option").removeAttr('selected');
+        			$("#brand option[value='"+product.brandId+"']").attr("selected", "selected");
+        			$("#kind option[value='"+product.kindId+"']").attr("selected", "selected");
+        			$("select").trigger("liszt:updated");//更新前端界面
+        			
+        			$("#productform input[name='url']").val(product.url);
+        			$("#productform input[name='guideMap']").val(product.guideMap);
+        			$("#productform input[name='color']").val(product.color);
+        			$("#createTime").val(product.createTime);
+        			$("#productform input[name='priority']").val(product.priority);
+        			$("#productform input[name='isPublish'][value='"+product.isPublist+"']").attr("checked",true);
+        			
+        			CKEDITOR.instances.editor1.setData(product.detailInfo);
+        			$('#productmodal').modal('show');
+        		}
+        	});
+		}
 		
-		
-		
-		
+	
+		//增加一条记录，弹出对话框
+		function addNewRecord(){
+			$("#productform input[name='id']").val("");
+			$('#productmodal').modal({
+				  keyboard: false
+				});
+		}
 		
 		//点击对话框保存按钮，保存产品信息
 		$("#saveproduct").on("click",function(){
@@ -403,8 +360,7 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
         			$('#productmodal').modal('hide');
         			jQuery(grid_selector).jqGrid().trigger("reloadGrid");
         			//清空表单
-        			$(':input','#productform').val(''); 
-        			CKEDITOR.instances.editor1.setData("");
+        			clearProductForm();
         		}
         	});
 			
@@ -413,8 +369,7 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 		//点击取消按钮时，也清空表单
 		$("#canclebutton").on("click",function(){
 			//清空表单
-			$(':input','#productform').val(''); 
-			CKEDITOR.instances.editor1.setData("");
+			clearProductForm();
 		});
 		
 
@@ -433,15 +388,93 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 		//初始化优先级为10
 		$("#productform input[name='priority']").val(10);
 		
+		
+		function viewRecord(){
+			$('#lookproductmodal').modal('show');
+		}
+		
+		//查看产品信息的模态框
+		$('#lookproductmodal').modal({
+			  keyboard: false,
+			  show:false
+		});
+		//模态框展开时触发的操作
+		$('#lookproductmodal').on('show.bs.modal', function (e) {
+			var ids=$(grid_selector).jqGrid('getGridParam','selarrrow');
+			var strs= new Array(); 
+		    strs =ids.toString().split(",");
+		    if(strs.length>1){
+		    	alert("不能同时选中多行进行编辑，请重新选择！");
+		    	return false;
+		    }
+		    //ajax，根据id到取得记录
+			$.ajax({
+        		url:"/ShopSys/productmanage/productAction_loadProductById.action",
+        		type:"post",
+        		dataType:"json",
+        		data:{
+        			"id":strs[0]
+        		},
+        		success:function(data){
+        			var product=data.product;
+        			alert(product.id);
+        			//$("#lookproductform input[name='id']").val(product.id);
+        			$("#lookproductform input[name='productNo']").val(product.productNo);
+        			$("#lookproductform input[name='productName']").val(product.productName);
+        			$("#lookproductform input[name='price']").val(product.price);
+        			$("#lookproductform input[name='color']").val(product.color);
+        			alert("brand:"+product.brandId);
+        			alert("kind:"+product.kindId);
+        			
+        			$("#lookproductform select option").removeAttr('selected');
+        			$("#lookproductform select[name='brand'] option[value='"+product.brandId+"']").attr("selected", "selected");
+        			$("#lookproductform select[name='kind'] option[value='"+product.kindId+"']").attr("selected", "selected");
+        			//$("#lookproductform select").trigger("liszt:updated");//更新前端界面
+        			
+        			$("#lookproductform input[name='url']").val(product.url);
+        			$("#lookproductform input[name='guideMap']").val(product.guideMap);
+        			$("#lookproductform input[name='color']").val(product.color);
+        			$("#lookproductform input[name='createTime']").val(product.createTime);
+        			$("#lookproductform input[name='priority']").val(product.priority);
+        			$("#lookproductform input[name='isPublish'][value='"+product.isPublist+"']").attr("checked",true);
+        			
+        			
+        			
+        		}
+        	});
+		});
+		
+		
+		
 	});
 	
 	
 	
+	//清空表单
+	function clearProductForm(){
+		
+		$("#productform input[name='id']").val("");
+		$("#productform input[name='productNo']").val("");
+		$("#productform input[name='productName']").val("");
+		$("#productform input[name='price']").val("");
+		$("#productform input[name='color']").val("");
+		$("#productform input[name='url']").val();
+		$("#createTime").val(getNowTime());
+		$("#productform input[name='priority']").val(10);
+		$("#productform select option").removeAttr('selected');
+		$("#productform select[name='brand'] option[value=0]").attr("selected", "selected");
+		$("#productform select[name='kind'] option[value=0]").attr("selected", "selected");
+		$("select").trigger("liszt:updated");//更新前端界面
+		$("#productform input[name='isPublish'][value=true]").attr("checked","selected");
+		$("#productform input[name='guideMap']").val("");
+		CKEDITOR.instances.editor1.setData("");
+	}
 	
 	
 	
 	
 	
+	//上传引导图插件
 	try {
 		  Dropzone.autoDiscover = false;
 		  var myDropzone = new Dropzone("#dropzone" , {
@@ -489,8 +522,6 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 		  alert('不支持该版本的浏览器!');
 		}
 	
-	
-	
 	//获得现在的时间
 	function getNowTime(){
 		var myDate = new Date();
@@ -520,5 +551,4 @@ var scripts = [null,"/ShopSys/common/ace/assets/js/dropzone.js",
 		var nowTime=year+"-"+smonth+"-"+sdate+" "+hourslocale+minutes;
 		return nowTime;
 	}
-	
-	});
+});

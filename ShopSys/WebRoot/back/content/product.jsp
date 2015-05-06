@@ -47,7 +47,7 @@
 
 
 
-<!-- add -->
+<!-- add or edit -->
 <div  id="productmodal" class="modal fade bs-example-modal-lg"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -86,8 +86,8 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label no-padding-right" > 品牌： </label>
 						<div class="col-sm-4">
-							<select name="brand" class=" col-xs-10 col-sm-9"   data-placeholder="选择一个品牌">
-										<option value="0"> 0 </option>
+							<select id="brand" name="brand" class=" col-xs-10 col-sm-9"  autocomplete="off" data-placeholder="选择一个品牌">
+										<option value="0"> abl0 </option>
 										<option value="1">Alabama1</option>
 										<option value="2">Alaska2</option>
 										<option value="3">Arizona3</option>
@@ -95,7 +95,7 @@
 						</div>
 						<label class="col-sm-2 control-label no-padding-right" >  类别： </label>
 						<div class="col-sm-4">
-							<select name="kind" class=" col-xs-10 col-sm-9"   data-placeholder="选择类别">
+							<select id="kind" name="kind" class=" col-xs-10 col-sm-9" autocomplete="off"  data-placeholder="选择类别">
 										<option value="0"> 常用 </option>
 										<option value="1">户外</option>
 										<option value="2">文具</option>
@@ -180,14 +180,6 @@
              
            
 			<script src="<%=basePath %>/common/ckeditor/ckeditor.js"></script>	
-	
-		   <!--  <div class="row">
-		    	 <h4>详细信息：</h4>
-				 <textarea name="editor1" id="editor1" rows="20" cols="80">
-	                This is my textarea to be replaced with CKEditor.
-	            </textarea>
-		    </div>/.row -->
-	
 	         <script>
 	                // Replace the <textarea id="editor1"> with a CKEditor
 	                // instance, using default configuration.
@@ -219,6 +211,143 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- 查看产品 -->
+<div  id="lookproductmodal" class="modal fade bs-example-modal-lg"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="lookmyModalLabel">
+				<i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i> 产品详情
+			</h4>
+	     </div>
+      <div class="modal-body">
+             <div class="row">
+             	<form id="lookproductform" class="form-horizontal" role="form">
+		             		<!-- #section:elements.form -->
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 产品编号： </label>
+		
+						<div class="col-sm-4">
+							<input name="productNo" type="text"  placeholder="产品编号" class="col-xs-10 col-sm-9" />
+						</div>
+						<label class="col-sm-2 control-label no-padding-right" > 产品名称 ：</label>
+						<div class="col-sm-4">
+							<input name="productName" type="text"  placeholder="产品名称" class="col-xs-10 col-sm-9" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 价格： </label>
+						<div class="col-sm-4">
+							<input name="price" type="text"  placeholder="价格" class="col-xs-10 col-sm-9" />
+						</div>
+						<label class="col-sm-2 control-label no-padding-right" > 颜色： </label>
+						<div class="col-sm-4">
+							<input name="color" type="text"  placeholder="颜色" class="col-xs-10 col-sm-9" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 品牌： </label>
+						<div class="col-sm-4">
+							<select  name="brand" class=" col-xs-10 col-sm-9"  autocomplete="off" data-placeholder="选择一个品牌">
+										<option value="0"> abl0 </option>
+										<option value="1">Alabama1</option>
+										<option value="2">Alaska2</option>
+										<option value="3">Arizona3</option>
+							</select>
+						</div>
+						<label class="col-sm-2 control-label no-padding-right" >  类别： </label>
+						<div class="col-sm-4">
+							<select  name="kind" class=" col-xs-10 col-sm-9" autocomplete="off"  data-placeholder="选择类别">
+										<option value="0"> 常用 </option>
+										<option value="1">户外</option>
+										<option value="2">文具</option>
+										<option value="3">测量</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 优先级： </label>
+						<div class="col-sm-4">
+							<input name="priority" type="text"  placeholder="优先级" class="col-xs-10 col-sm-9" />
+						</div>
+						<label class="col-sm-2 control-label no-padding-right" > 创建时间： </label>
+						<div class="col-sm-4">
+							<div class="input-group">
+									<input name="createTime"  type="text" class="form-control"  />
+									<span class="input-group-addon">
+										<i class="fa fa-clock-o bigger-90"></i>
+									</span>
+							</div>
+						</div>
+						
+						
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 是否发布： </label>
+						<div class="col-sm-6">
+							<div class="control-group">
+							  <div class="radio" >
+								<div class="col-sm-3">
+								<label>
+								<input class="ace" type="radio" value="true" name="isPublish" checked="checked">
+								<span class="lbl">是</span>
+								</label>
+								</div>
+								<div class="col-sm-3">
+								<label>
+								<input class="ace" type="radio" value="false" name="isPublish">
+								<span class="lbl">否</span>
+								</label>
+								</div>
+							 </div>
+						   </div>
+						</div>
+						
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > URL： </label>
+						<div class="col-sm-10">
+							<input name="url" type="text"  placeholder="URL" class="col-xs-10 col-sm-9" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" > 引导图： </label>
+						<div class="col-sm-10">
+							<input name="guideMap" type="text"  placeholder="引导图路径" class="col-xs-10 col-sm-9" />
+						</div>
+					</div>
+             </form>
+             </div>
+             <div class="row">
+				<div class="col-xs-9 col-md-offset-1">
+					引导图img....
+				</div>
+				
+             </div>
+             <!-- 详细信息 -->
+             <div class="row">
+             	<div class="form-group">
+					      <label style="margin-left:20px;" class="col-sm-12 " for="form-field-1">详细信息： </label>
+						<div class="col-sm-12">
+							详细信息....
+			            </div>
+					</div>
+             </div>
+       
+      </div>
+      <div class="modal-footer" style="height:55px;">
+	        <button  type="button" class="btn btn-white btn-info btn-round" data-dismiss="modal">
+	        	<i class="ace-icon fa fa-times  red2"></i>关闭
+	        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
